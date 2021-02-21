@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Kalkulator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panel {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-content: space-between;
+      width: 500px;
+      height: 85vh;
+      /* margin: auto; */
+      /* background-color: #ddd; */
+      font-family: 'roboto condensed', arial;
+      color: black;
+      border: 2px solid black;
+      border-radius: 25px;
+      padding: 10px;
+      background-color: black;
+      background: rgb(255, 255, 255);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2413340336134454) 0%, rgba(102, 102, 102, 0.1881127450980392) 50%, rgba(0, 0, 0, 0.09287464985994398) 100%);
+      -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+      box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+
+    }
+
+    .result {
+      /* display: flex;
+   justify-content: flex-end;
+   align-items: center; */
+      flex-basis: 100%;
+      height: 15vh;
+      background-color: #fff;
+      line-height: 15vh;
+      text-align: right;
+      padding-right: 30px;
+      font-size: 4vh;
+      border: 2px solid black;
+      border-radius: 25px;
+      -webkit-box-shadow: inset 0px 0px 9px 3px rgba(50, 50, 50, 0.5);
+      -moz-box-shadow: inset 0px 0px 9px 3px rgba(50, 50, 50, 0.5);
+      box-shadow: inset 0px 0px 9px 3px rgba(50, 50, 50, 0.5);
+
+    }
+
+    div.result~div {
+
+      height: 10vh;
+      flex-basis: 30%;
+      background-color: lightgray;
+      font-size: 5vh;
+      text-align: center;
+      line-height: 10vh;
+      border: 2px solid black;
+      cursor: pointer;
+      border-radius: 25px;
+      background: rgb(255, 255, 255);
+      background: rgb(255, 255, 255);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2413340336134454) 0%, rgba(102, 102, 102, 0.1881127450980392) 50%, rgba(0, 0, 0, 0.09287464985994398) 100%);
+      -webkit-box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+      box-shadow: inset -1px 3px 8px 5px #fFF, 2px 5px 16px 0px #000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+    }
+
+    div>div:nth-last-child(1),
+    div>div:nth-last-child(2) {
+      flex-basis: 45%;
+    }
+
+    div.result~div:hover {
+      background-color: darkgrey;
+    }
+  </style>
+</head>
+
+<body class="checking">
+  <div class="panel">
+    <div class="result"></div>
+    <div class="sign one">1</div>
+    <div class="sign two">2</div>
+    <div class="sign three">3</div>
+    <div class="sign four">4</div>
+    <div class="sign five">5</div>
+    <div class="sign six">6</div>
+    <div class="sign seven">7</div>
+    <div class="sign eight">8</div>
+    <div class="sign nine">9</div>
+    <div class="sign plus">+</div>
+    <div class="sign zero">0</div>
+    <div class="sign minus">-</div>
+    <div class="sign divide">/</div>
+    <div class="sign dot">.</div>
+    <div class="sign multiply">*</div>
+    <div class="sign clear">C</div>
+    <div class="sign equals">=</div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
