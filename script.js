@@ -3,11 +3,13 @@ class Calculator {
     leftSideActionNumbers = [],
     rightSideActionNumbers = [],
     sign = [],
+    clearKey = [],
     operators = {
       math: ["+", "-", "/", "*"],
       equal: ["=", "Enter"],
       clear: ["C", "Delete", "Escape"],
-      dot: ["."]
+      dot: ["."],
+      clearLastNumber: ["Backspace"]
     },
     results = 0
   ) {
@@ -17,6 +19,7 @@ class Calculator {
     this.leftSideActionNumbers = leftSideActionNumbers;
     this.rightSideActionNumbers = rightSideActionNumbers;
     this.sign = sign;
+    this.clearKey = clearKey;
     this.operators = operators;
     this.results = results;
     this.calcDiv.addEventListener(
@@ -28,7 +31,7 @@ class Calculator {
 
   executeMathOperation(e) {
     //checking result for infinity and NaN
-    if (this.results === Infinity || isNaN(this.results)) {
+    if (this.results === Infinity || isNaN(this.results) || this.event === "Backspace") {
       this.results = 0;
       if (
         this.leftSideActionNumbers[0] == "Infinity" ||
@@ -41,7 +44,7 @@ class Calculator {
     this.event = e.type === "keydown" ? e.key : e.target.textContent;
     //checking for string || number
     this.number =
-      this.checkOperators(this.event, this.operators.math.concat(this.operators.clear, this.operators.equal, this.operators.dot)) ?
+      this.checkOperators(this.event, this.operators.math.concat(this.operators.clear, this.operators.equal, this.operators.dot, this.operators.clearLastNumber)) ?
       this.event :
       Number(this.event);
     //checking target
@@ -57,7 +60,7 @@ class Calculator {
       } else this.reset();
       this.equalityFlag = true;
     }
-    //checking result
+    //checking result from math operation for display in result panel 
     if (
       this.leftSideActionNumbers.length === 0 &&
       this.rightSideActionNumbers.length === 0 &&
@@ -73,21 +76,21 @@ class Calculator {
       this.number :
       this.resultPanel.textContent + this.number;
     this.pushToArray();
-    //checking for operation
+    //checking continuity math operation
     if (this.sign.length > 1) {
       if (this.rightSideActionNumbers.length === 0) {
         this.sign = [this.number];
         this.resultPanel.textContent =
           this.leftSideActionNumbers.join("") + this.number;
       } else {
+        this.sign.pop();
         this.calc(this.equalityFlag, this.leftSideActionNumbers, this.rightSideActionNumbers, this.sign)
         this.leftSideActionNumbers = [this.results];
         this.rightSideActionNumbers = [];
         this.pushToArray();
-        this.sign = [];
         this.sign = [this.event];
         this.resultPanel.textContent = this.checkingNanAndInfinity(this.results) ?
-          "Nie dziel przez 0" :
+          "Cannot be divided by zero" :
           this.results + this.sign;
       }
     }
@@ -113,35 +116,43 @@ class Calculator {
       this.calc(this.equalityFlag, this.leftSideActionNumbers, this.rightSideActionNumbers, this.sign)
       this.reset();
       this.resultPanel.textContent = this.checkingNanAndInfinity(this.results) ?
-        "Nie dziel przez 0" :
+        "Cannot be divided by zero" :
         this.results;
       this.leftSideActionNumbers = [this.results];
       this.equalityFlag = false;
+    }
+
+    if (this.event === "Backspace") {
+      this.correct(this.leftSideActionNumbers, this.rightSideActionNumbers, this.sign);
     }
   }
 
   pushToArray() {
     if (
       this.sign.length === 0 &&
-      !this.checkOperators(this.number, this.operators.math.concat(this.operators.equal))
+      !this.checkOperators(this.number, this.operators.math.concat(this.operators.equal, this.operators.clearLastNumber))
     ) {
       this.leftSideActionNumbers.push(this.number);
     }
     if (
       this.sign.length === 1 &&
-      !this.checkOperators(this.number, this.operators.math.concat(this.operators.equal))
+      !this.checkOperators(this.number, this.operators.math.concat(this.operators.equal, this.operators.clearLastNumber))
     ) {
       this.rightSideActionNumbers.push(this.number);
     }
-    if (this.checkOperators(this.number, this.operators.math)) {
+    if (this.checkOperators(this.number, this.operators.math, this.operators.clearLastNumber)) {
       this.sign.push(this.number);
+    }
+
+    if (this.checkOperators(this.number, this.operators.clearLastNumber)) {
+      this.clearKey.push(this.number);
     }
   }
 
-  calc(flag, lefSideNumbers, rightSideNumbers, sign) {
+  calc(flag, leftSideNumbers, rightSideNumbers, sign) {
     flag = flag
     flag = true;
-    const numbersLeft = lefSideNumbers.join("") * 1;
+    const numbersLeft = leftSideNumbers.join("") * 1;
     const numbersRight = rightSideNumbers.join("") * 1;
     this.results = sign.includes("*") ?
       numbersLeft * numbersRight :
@@ -151,8 +162,8 @@ class Calculator {
       numbersLeft - numbersRight :
       sign.includes("/") ?
       numbersLeft / numbersRight :
-      this.number.length > 0 ?
-      lefSideNumbers.join("") :
+      leftSideNumbers.length > 0 ?
+      leftSideNumbers.join("") :
       0;
   }
 
@@ -161,15 +172,26 @@ class Calculator {
     this.leftSideActionNumbers = [];
     this.rightSideActionNumbers = [];
     this.sign = [];
+    this.clearKey = [];
   }
 
-  correct() {
-    if (this.event === "Backspace") {}
+  correct(leftSideNumbers, rightSideNumbers, sign) {
+    if (leftSideNumbers.length > 0 && rightSideNumbers.length === 0) {
+      leftSideNumbers.pop();
+      this.resultPanel.textContent = leftSideNumbers.join("");
+    }
+    if (rightSideNumbers.length > 0) {
+      rightSideNumbers.pop();
+      this.resultPanel.textContent = leftSideNumbers.join("") + sign + rightSideNumbers.join("");
+    }
+    if (leftSideNumbers.length === 0) {
+      this.resultPanel.textContent = "0"
+    }
   }
 
-  checkOperators(text, operator) {
+  checkOperators(inputText, operator) {
     operator = operator;
-    return operator.includes(text);
+    return operator.includes(inputText);
   }
 
   checkingNanAndInfinity(variable) {
