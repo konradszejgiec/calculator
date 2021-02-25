@@ -6,6 +6,7 @@ Link to the project: https://konradszejgiec.github.io/calculator/
 
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [Notes](#notes)
 
 ## General info
 
@@ -17,3 +18,7 @@ Project is created with:
 * HTML
 * CSS 
 * JavaScript
+
+## Notes
+
+HTML and CSS (with some changes) was taken from Udemy course: "Front-end zaawansowany w 15 dni",  made by Bartłomiej Borowczyk.
