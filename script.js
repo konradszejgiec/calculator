@@ -45,7 +45,7 @@ class Calculator {
       this.event :
       Number(this.event);
     //checking target
-    if (isNaN(this.number) && typeof this.number !== "string") return;
+    if ((isNaN(this.number) && typeof this.number !== "string") || e.target.className.includes("result")) return;
     //checking equality flag
     if (this.equalityFlag === false) {
       if (
