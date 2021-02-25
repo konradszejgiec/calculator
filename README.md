@@ -10,7 +10,7 @@ Link to the project: https://konradszejgiec.github.io/calculator/
 
 ## General info
 
-This project is just a simple calculator with the functianolity similar to default windows calculator. The assumption was to create in JS ES6 Class a simple looking calculator with attendant to make basic math operations. 
+This project is just a simple calculator with the functianolity similar to default windows calculator. The assumption was to create in JS ES6 Class a simple looking calculator performing basic math operations. 
 	
 ## Technologies
 
