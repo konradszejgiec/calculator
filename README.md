@@ -1,5 +1,7 @@
 # Calculator
 
+Link to the project: https://konradszejgiec.github.io/calculator/
+
 ## Table of contents
 
 * [General info](#general-info)
