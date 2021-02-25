@@ -21,4 +21,4 @@ Project is created with:
 
 ## Notes
 
-HTML and CSS (with some changes) was taken from Udemy course: "Front-end zaawansowany w 15 dni",  made by Bartłomiej Borowczyk.
+HTML and CSS (with some changes) was taken from Udemy course: "Front-end zaawansowany w 15 dni",  made by Bartłomiej Borowczyk. The project is still under construction.
