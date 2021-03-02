@@ -1,31 +1,21 @@
 class Calculator {
-  constructor(
-    leftSideActionNumbers = [],
-    rightSideActionNumbers = [],
-    sign = [],
-    clearKey = [],
-    operators = {
+  constructor() {
+    this.calcDiv = document.querySelector(".panel");
+    this.resultPanel = document.querySelector(".result");
+    this.resultPanel.textContent = "0";
+    this.leftSideActionNumbers = [];
+    this.rightSideActionNumbers = [];
+    this.sign = [];
+    this.clearKey = [];
+    this.operators = {
       math: ["+", "-", "/", "*"],
       equal: ["=", "Enter"],
       clear: ["C", "Delete", "Escape"],
       dot: ["."],
       clearLastNumber: ["Backspace"]
-    },
-    results = 0
-  ) {
-    this.calcDiv = document.querySelector(".panel");
-    this.resultPanel = document.querySelector(".result");
-    this.resultPanel.textContent = "0";
-    this.leftSideActionNumbers = leftSideActionNumbers;
-    this.rightSideActionNumbers = rightSideActionNumbers;
-    this.sign = sign;
-    this.clearKey = clearKey;
-    this.operators = operators;
-    this.results = results;
-    this.calcDiv.addEventListener(
-      "click",
-      this.executeMathOperation.bind(this)
-    );
+    };
+    this.results = 0;
+    this.calcDiv.addEventListener("click",this.executeMathOperation.bind(this));
     window.addEventListener("keydown", this.executeMathOperation.bind(this));
   }
 
